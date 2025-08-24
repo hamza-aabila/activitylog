@@ -125,7 +125,7 @@ trait ActionContent
     }
     protected function configureInfolist(): void
     {
-        $this->infolist(function (Infolist $infolist) {
+        $this->infolist(function (Schema $schema) {
             $activities = $this->getActivityLogRecord($record, $this->getWithRelations());
 
             $formattedActivities = $activities->map(function ($activity) {
