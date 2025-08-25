@@ -18,15 +18,8 @@
     >
         @if (count($childComponentContainers = $getChildComponentContainers()))
             <ol class="relative border-gray-200 border-s dark:border-gray-700">
-                <x-filament::grid
-                    :default="$getGridColumns('default')"
-                    :sm="$getGridColumns('sm')"
-                    :md="$getGridColumns('md')"
-                    :lg="$getGridColumns('lg')"
-                    :xl="$getGridColumns('xl')"
-                    :two-xl="$getGridColumns('2xl')"
-                    class="gap-2"
-                >
+                <div class="grid gap-6 grid-cols-1 md:grid-cols-2">
+                    <div class="col-span-1">
                     @foreach ($childComponentContainers as $container)
                         <li
                             @class([
@@ -38,7 +31,8 @@
                             {{ $container }}
                         </li>
                     @endforeach
-                </x-filament::grid>
+                </div>
+                </div>
             </ol>
         @elseif (($placeholder = $getPlaceholder()) !== null)
             <x-filament-infolists::entries.placeholder>

@@ -126,6 +126,12 @@ trait ActionContent
     protected function configureInfolist(): void
     {
         $this->infolist(function (Schema $schema) {
+	$record = $this->getRecord();
+            if (! $record) {
+                return $schema
+                    ->state(['activities' => []])
+                    ->components($this->getInternalSchema());
+            }
             $activities = $this->getActivityLogRecord($record, $this->getWithRelations());
 
             $formattedActivities = $activities->map(function ($activity) {
@@ -138,6 +144,7 @@ trait ActionContent
             })->toArray();
 
             return $schema
+		->record(fn () => $record)
                 ->state(['activities' => $formattedActivities])
                 ->components($this->getInternalSchema());
         });
